@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jsteer2d">
+    <output-path>$PROJECT_DIR$/out/artifacts/jsteer2d</output-path>
+    <root id="archive" name="jsteer2d.jar">
+      <element id="module-output" name="jsteer2d" />
+    </root>
+  </artifact>
+</component>
