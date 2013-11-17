@@ -32,9 +32,10 @@ public class VehicleUtils
      */
     public static float getStoppingDistance(Vehicle vehicle)
     {
-        // From: v^2 = u^2 + 2as, and since v = 0:
+        // From: v^2 = u^2 + 2as, and since v = 0 and 'a' is negative (backwards):
         // s = u^2 / 2a
-        return vehicle.getVelocity().len2() / 2 * vehicle.getMaximumReverseThrust();
+        float distance = vehicle.getVelocity().len2() / 2 * -vehicle.getMaximumReverseThrust();
+        return Math.max(distance, 0);
     }
 
     /**
