@@ -24,6 +24,9 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class SteeringComponents
 {
+    ///////////////////////////////////////////////////////////////////////////
+    // Fields
+
     /**
      * A instance to represent no steering force.
      */
@@ -54,6 +57,9 @@ public class SteeringComponents
      */
     private float rotation;
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Constructors
+
     public SteeringComponents(String steeringObjective, float rotation, float  thrust)
     {
         this(steeringObjective, null, null, rotation, thrust);
@@ -68,6 +74,9 @@ public class SteeringComponents
         this.thrust = thrust;
         this.rotation = rotation;
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Methods
 
     /**
      * Checks whether the values of the steering components are valid.
@@ -87,5 +96,21 @@ public class SteeringComponents
     public void setThrust(float thrust)
     {
         this.thrust = thrust;
+    }
+
+    public float getRotation()
+    {
+        return rotation;
+    }
+
+    public Vector2 getSteeringTarget()
+    {
+        return steeringTarget;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("steering:[rotation:%.2f thrust:%.2f]  - %s", rotation, thrust, steeringObjective);
     }
 }

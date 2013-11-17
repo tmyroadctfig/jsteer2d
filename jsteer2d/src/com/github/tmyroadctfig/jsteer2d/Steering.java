@@ -24,6 +24,9 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Steering
 {
+    ///////////////////////////////////////////////////////////////////////////
+    // Fields
+
     /**
      * The vehicle steering is working on.
      */
@@ -61,6 +64,9 @@ public class Steering
      */
     protected float avoidanceFactor;
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Constructor
+
     /**
      * Creates a new instance.
      *
@@ -91,6 +97,19 @@ public class Steering
         maximumBoidDistance = 400;
         minimumBoidDistance = 50;
         boidCohesionDistance = 100;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Methods
+
+    /**
+     * Gets the vehicle.
+     *
+     * @return the vehicle.
+     */
+    public Vehicle getVehicle()
+    {
+        return vehicle;
     }
 
     /**
