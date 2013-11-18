@@ -54,7 +54,8 @@ public class RotationPreferenceSteering implements GetSteeringComponents
 
         float thrust = 0;
 
-        if (Math.abs(rotation) < nonRotationWindow || Math.abs(rotation - Math.PI) < nonRotationWindow)
+        float nonRotationWindowFraction = nonRotationWindow * elapsedTime;
+        if (Math.abs(rotation) < nonRotationWindowFraction || Math.abs(rotation - Math.PI) < nonRotationWindowFraction)
         {
             thrust = vehicle.getDirection().dot(normalizedSteeringForce);
 
