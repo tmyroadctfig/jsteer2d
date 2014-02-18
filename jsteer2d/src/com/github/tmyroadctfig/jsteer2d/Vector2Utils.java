@@ -26,28 +26,25 @@ public class Vector2Utils
 {
     public static float findAngleBetweenTwoVectors(Vector2 v1, Vector2 v2)
     {
-        // from: http://forums.xna.com/forums/p/6035/31831.aspx#31831
-
         // turn vectors into unit vectors
         v1 = v1.cpy().nor();
         v2 = v2.cpy().nor();
 
-        double angle = Math.acos(v1.dot(v2));
+        float angle1 = v1.angle();
+        float angle2 = v2.angle();
 
-        // if no noticable rotation is available return zero rotation this way we avoid Cross product artifacts
-        if (Math.abs(angle) < 0.0001)
+        float result = angle1 - angle2;
+
+        if (result > 180)
         {
-            return 0;
+            result -= 360;
+        }
+        else if (result <= -180)
+        {
+            result += 360;
         }
 
-        angle *= signal(v1, v2);
-
-        return (float)angle;
-    }
-
-    private static int signal(Vector2 v1, Vector2 v2)
-    {
-        return (v1.y * v2.x - v2.y * v1.x) > 0 ? 1 : -1;
+        return (float) Math.toRadians(result);
     }
 
     public static boolean equalsWithin(Vector2 v1, Vector2 v2, float margin)
