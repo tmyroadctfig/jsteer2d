@@ -121,7 +121,7 @@ public class Steering
      */
     public SteeringComponents seek(Vector2 target, float elapsedTime)
     {
-        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().mul(elapsedTime));
+        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().scl(elapsedTime));
         Vector2 steeringForce = SteeringHelper.seek(estimatedPosition, target);
 
         return getComponents("Seek", steeringForce, elapsedTime);
@@ -136,8 +136,8 @@ public class Steering
      */
     public SteeringComponents pursue(Vehicle target, float elapsedTime)
     {
-        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().mul(elapsedTime));
-        Vector2 estimatedTargetPosition = target.getPosition().cpy().add(target.getVelocity().cpy().mul(elapsedTime));
+        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().scl(elapsedTime));
+        Vector2 estimatedTargetPosition = target.getPosition().cpy().add(target.getVelocity().cpy().scl(elapsedTime));
         Vector2 steeringForce = SteeringHelper.seek(estimatedPosition, estimatedTargetPosition);
 
         return getComponents("Pursue", steeringForce, elapsedTime);
@@ -152,8 +152,8 @@ public class Steering
      */
     public SteeringComponents evade(Vehicle target, float elapsedTime)
     {
-        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().mul(elapsedTime));
-        Vector2 estimatedTargetPosition = vehicle.getPosition().cpy().add(target.getVelocity().cpy().mul(elapsedTime));
+        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().scl(elapsedTime));
+        Vector2 estimatedTargetPosition = vehicle.getPosition().cpy().add(target.getVelocity().cpy().scl(elapsedTime));
         Vector2 steeringForce = SteeringHelper.flee(estimatedPosition, estimatedTargetPosition);
 
         return getComponents("Evade", steeringForce, elapsedTime);
@@ -176,12 +176,12 @@ public class Steering
         {
             // Find the steering direction
             Vector2 obstacleOffset = vehicle.getPosition().cpy().sub(nearestObstacle.getPosition());
-            Vector2 parallel = vehicle.getDirection().cpy().mul(obstacleOffset.dot(vehicle.getDirection()));
+            Vector2 parallel = vehicle.getDirection().cpy().scl(obstacleOffset.dot(vehicle.getDirection()));
             Vector2 perpendicular = obstacleOffset.sub(parallel);
 
             // Offset to be past the obstacle's edge
             perpendicular.nor();
-            Vector2 seekTo = nearestObstacle.getPosition().cpy().add(perpendicular.mul(nearestObstacle.getRadius() + (vehicle.getRadius() * avoidanceFactor)));
+            Vector2 seekTo = nearestObstacle.getPosition().cpy().add(perpendicular.scl(nearestObstacle.getRadius() + (vehicle.getRadius() * avoidanceFactor)));
 
             return getComponents("Avoid obstacle", seekTo, elapsedTime);
         }
@@ -329,7 +329,7 @@ public class Steering
      */
     public SteeringComponents arriveAt(Vector2 target, float elapsedTime)
     {
-        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().mul(elapsedTime));
+        Vector2 estimatedPosition = vehicle.getPosition().cpy().add(vehicle.getVelocity().cpy().scl(elapsedTime));
         float distanceToTarget = target.cpy().sub(estimatedPosition).len();
         float stoppingDistance = VehicleUtils.getStoppingDistance(vehicle);
 

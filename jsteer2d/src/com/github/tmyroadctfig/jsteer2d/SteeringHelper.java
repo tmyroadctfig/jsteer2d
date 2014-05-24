@@ -37,7 +37,7 @@ public class SteeringHelper
 
         float predictionTime = 1; // MathHelper.SmoothStep(-1, 1, parallel);
 
-        Vector2 predictedQuarryPosition = quarry.getPosition().cpy().add(quarry.getVelocity().cpy().mul(predictionTime));
+        Vector2 predictedQuarryPosition = quarry.getPosition().cpy().add(quarry.getVelocity().cpy().scl(predictionTime));
 
         float distanceToQuarry = vehicle.getPosition().cpy().sub(quarry.getPosition()).len();
 
@@ -71,7 +71,7 @@ public class SteeringHelper
      */
     public static Vector2 flee(Vector2 position, Vector2 target)
     {
-        Vector2 desiredDirection = seek(position, target).mul(-1);
+        Vector2 desiredDirection = seek(position, target).scl(-1);
         return desiredDirection;
     }
 }
