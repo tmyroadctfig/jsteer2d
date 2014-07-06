@@ -53,7 +53,7 @@ public class SteeringComponents
     private float thrust;
 
     /**
-     * The rotation quantity.
+     * The rotation quantity (in radians).
      */
     private float rotation;
 
