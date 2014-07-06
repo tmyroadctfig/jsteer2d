@@ -20,7 +20,7 @@ package com.github.tmyroadctfig.jsteer2d;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * A steering stategy that preferences rotation over thrust.
+ * A steering strategy that preferences rotation over thrust.
  */
 public class RotationPreferenceSteering implements GetSteeringComponents
 {
